@@ -1,0 +1,100 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class GerenciadorTarefas {
+	private List<Tarefa> tarefas;
+	private Scanner scanner;
+	
+	public GerenciadorTarefas() {
+		tarefas = new ArrayList<>();
+		scanner = new Scanner(System.in);
+	}
+	
+	public void adicionarTarefa(String descricao) {
+		tarefas.add(new Tarefa(descricao));
+		System.out.println("tarefa Adicionada");
+	}
+	
+	public void listaTarefas() {
+		if (tarefas.isEmpty()) {
+			System.out.println("Nenhuma tarefa cadastrada");
+			return;
+		}
+		
+		System.out.println("\nLista de tarefas:");
+		for (int i = 0; i < tarefas.size(); i++) {
+			System.out.println((i + 1) + ". " + tarefas.get(i));
+		}
+	}
+	
+	public void marcarComoConcluida(int indice) {
+		if (indice >= 0 && indice < tarefas.size()) {
+			tarefas.get(indice).setConcluida(true);
+			System.out.println("Tarefa marcada como concluida");
+		} else {
+			System.out.println("Índice inválido");
+		}
+	}
+	
+	public void removerTarefa(int indice) {
+		if (indice >= 0 && indice < tarefas.size()) {
+			tarefas.remove(indice);
+			System.out.println("Tarefa removida da lista");
+		} else {
+			System.out.println("Índice inválido");
+		}
+	}
+	
+	public void exibirMenu() {
+		System.out.println("\n=== Gerenciador de Tarefas ===");
+		System.out.println("1. Adicionar Tarefa");
+		System.out.println("2. Lista de Tarefas");
+		System.out.println("3. Marcar terfa como Concluida");
+		System.out.println("4. Remover Tarefa");
+		System.out.println("5. Sair");
+		System.out.println("Escolha uma opção: ");
+	}
+	
+	public void executar() {
+		int opcao;
+		do {
+			exibirMenu();
+			opcao = scanner.nextInt();
+			scanner.nextLine();
+			
+			switch (opcao) {
+			case 1:
+				System.out.println("Digite a descrição da tarefa: ");
+				String descricao = scanner.nextLine();
+				adicionarTarefa(descricao);
+				break;
+			case 2:
+				listaTarefas();
+				break;
+			case 3:
+				listaTarefas();
+				System.out.println("Digite o número da tarefaa marcar como concluida: ");
+				int indiceConcluir = scanner.nextInt() - 1;
+				marcarComoConcluida(indiceConcluir);
+				break;
+			case 4:
+				listaTarefas();
+				System.out.println("Digite o número da tarefa a remover: ");
+				int indiceRemover = scanner.nextInt() - 1;
+				removerTarefa(indiceRemover);
+				break;
+			case 5:
+				System.out.println("Saindo do sistema...");
+				break;
+			default:
+				System.out.println("Opção inválida");
+			}
+		} while (opcao != 5);
+	}
+	
+	public static void main(String[] args) {
+		GerenciadorTarefas gerenciador = new GerenciadorTarefas();
+		gerenciador.executar();
+	}
+}
