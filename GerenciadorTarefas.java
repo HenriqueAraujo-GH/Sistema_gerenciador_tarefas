@@ -13,8 +13,7 @@ public class GerenciadorTarefas {
 	
 	public void adicionarTarefa(String descricao) {
 		String descricao1 = menu.lerTexto("Digite a descrição da tarefa: ");
-        LocalDate data = menu.lerData("Digite a data (dd/MM/aaaa): ");
-        String local = menu.lerTexto("Digite o local: ");
+        LocalDate data = menu.lerData("Digite a data da tarefa (dd/MM/aaaa): ");
         
         tarefas.add(new Tarefa(descricao1, data));
         menu.mostrarMensagem("Tarefa adicionada com sucesso!");
@@ -55,10 +54,10 @@ public class GerenciadorTarefas {
     }
 	
 	public void editarTarefa() {
-        listaTarefas();
+		listaTarefas();
         if (tarefas.isEmpty()) return;
         
-        int indice = menu.lerIndice("Digite o número da tarefa: ", tarefas.size());
+        int indice = menu.lerIndice("Digite o número da tarefa para editar: ", tarefas.size());
         Tarefa tarefa = tarefas.get(indice);
         
         menu.mostrarMensagem("\nEditando tarefa:");
@@ -66,7 +65,7 @@ public class GerenciadorTarefas {
         menu.mostrarMensagem("2. Data: " + tarefa.getData());
         menu.mostrarMensagem("0. Cancelar");
         
-        int opcao = menu.lerIndice("O que deseja editar? ", 3);
+        int opcao = menu.lerIndice("O que deseja editar? ", 2);
         
         switch (opcao + 1) {
             case 1:
