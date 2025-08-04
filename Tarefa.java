@@ -1,6 +1,6 @@
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 
 public class Tarefa {
 	private String descricao;
@@ -51,6 +51,7 @@ public class Tarefa {
 			retorno = "[ ]";
 		}
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return String.format("%s %s | Data: %s | Local: %s | Status: %s", descricao, data.format(formatter), status);
+        return String.format("%s %s | Data: %s | Status: %s", 
+                          retorno, descricao, data.format(formatter), status);
 	}
 }
